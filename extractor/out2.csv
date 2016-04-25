@@ -1,0 +1,7 @@
+qry_class,qry_name,qry_name_len,qry_type,resp_class,resp_len,resp_name,resp_ttl,resp_type,id,flags_opcode,flags_response,a,count_queries,count_auth_rr,count_answers
+0x00000001,elb-production-stream-215686118.us-east-1.elb.amazonaws.com,59,1,,,,,,0x00003a9c,0,0,,1,0,0
+0x00000001,www.google.com,14,1,,,,,,0x000042f1,0,0,,1,0,0
+0x00000001,www.google.com,14,1,,,,,,0x00002632,0,0,,1,0,0
+0x00000001,www.google.com,14,1,0x00000001,4,www.google.com,286,1,0x00002632,0,1,216.58.217.164,1,0,1
+0x00000001,www.reddit.com,14,28,0x00000001,44,reddit.com,5157,6,0x000019e1,0,1,,1,1,0
+0x00000001,e6858.dscc.akamaiedge.net,25,1,0x00000001,4,e6858.dscc.akamaiedge.net,17,1,0x000051e9,0,1,23.196.128.131,1,0,1

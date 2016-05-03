@@ -7,3 +7,6 @@
 *.fls
 *.log
 *.pdf
+*.out
+*.zip
+venv

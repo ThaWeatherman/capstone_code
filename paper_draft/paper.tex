@@ -5,11 +5,12 @@
 % \usepackage{graphicx}
 % \usepackage{listings}
 \usepackage{fancyhdr}
+\usepackage{hyperref}
 
 \pagestyle{fancy}
 \lhead{Sean Beck}
 
-\renewcommand\thesection{}
+% \renewcommand\thesection{}
 
 \setlength{\parindent}{1.4em}
 
@@ -29,18 +30,13 @@
 \end{abstract}
 
 \input{intro.tex}
-\newpage
-\input{related.tex}
-\newpage
 \input{background.tex}
-\newpage
+\input{related.tex}
 \input{experiment.tex}
-\newpage
 \input{results.tex}
-\newpage
 \input{conclusion.tex}
-\newpage
 
+\nocite{*}
 \bibliographystyle{plain}
 \bibliography{bib}
 

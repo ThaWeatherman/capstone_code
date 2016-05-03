@@ -78,4 +78,41 @@ This does not compromise DNS in any way, but it does maliciously use the service
 
 \subsubsection{Generated Names}
 
+In recent years malware has grown significantly more sophisticated.
+Some worms and botnets in particular have made a significant impact on the world.
+Malware will algorithmically generate domain names that it will then contact for command and control
+or for updates.
+A very relevant example is the Conficker worm.
+The Conficker worm's five variants used generated domain names to communicate daily with the worm
+owner.
+In the beginning, the worm would generate $250$ names each day and would attempt to contact each of
+the names via HTTP until it made a successful connection and downloaded a new payload.
+The fourth variant of Conficker generates $50,000$ names each day but only chooses $500$ of them
+at random to contact~\cite{conficker}.
+This allowed the worm to avoid attempts by registrars to curtail its spread.
+The worm owner needed only to register one of the thousands of names, and the worms would eventually
+find it for updates.
+The Kraken and Torpig botnets also used generated names for similar purposes~\cite{algorithm}.
+This clearly is an issue that needs to be solved.
+
 \subsubsection{DNS Tunneling}
+
+DNS tunneling is the act of hosts communicating using DNS packets.
+DNS is not intended to be used as a communication layer, but it is not impossible to use it as one.
+Tunneling is used to circumvent firewall rules.
+A practical example is circumventing the paywall for internet usage on airplanes.
+When airplane hotspots were first implemented, it was possible to circumvent the paywall by sending
+all traffic through DNS.
+The routers would block TCP traffic until payment was made for the service, but it paid no attention
+to DNS requests and responses.
+A more malicious example is data exfiltration.
+After compromising a target, malware may need to exfiltrate sensitive data from the target.
+Sending large amounts of traffic over various TCP ports may be easily detected, but DNS is inherently
+trusted in many networks, and is not monitored as a result.
+Hackers may also communicate with their malware using DNS tunneling rather than a normal TCP
+connection.
+Raman \etal{} proved that tunneling is a suitable method for malware delivery and data exfiltration
+using a Metasploit module of their creation to deploy malware and communicate with it over DNS~\cite{tunnelpenetrate}.
+They admitted their implementation is not as stealthy as it could be, but it is good enough to
+circumvent most common network protections.
+Tunneling is hard to address with simple network rules, and a good solution for detection is needed.

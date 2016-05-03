@@ -7,12 +7,45 @@ This includes work in semi-supervised learning as well as detecting DNS threats.
 
 Security is not a new application for machine learning.
 Many researchers have attempted to use machine learning for intrusion detection, spam filtering,
-or other topics and have been successful.
-However, many of these 
+or other topics, and have been successful.
+However, many of these applications have relied on purely supervised or unsupervised learning techniques.
+Semi-supervised learning has only gained popularity in the last few years, but has proven itself
+a valuable tool, much more so than purely supervised or unsupervised methods.
+
+A problem with machine learning is the tendency towards false alarms.
+This is especially prevalent in unsupervised methods.
+Intrusion detection is the most logical application of machine learning in the field of security.
+A system is best when it can detect both known threats and unknown threats.
+This requires unsupervised learning to detect the unknown threats, but can easily result in false alarms.
+In Chiu \etal{}, they combatted false alarms in the Snort Intrusion Detection System (IDS), and were
+able to reduce the false alarm rate by $85\%$ using semi-supervised learning~\cite{semialarm}.
+In Chen \etal{}, the researchers proved that semi-supervised algorithms of their creation are able
+to outperform both supervised and unsupervised methods~\cite{semidetect}.
+It is also proven in Wang \etal{} that network traffic clustering is significantly improved using
+semi-supervised learning~\cite{seminovel}.
 
 \subsection{DNS Threat Detection}
 
+There has been a significant amount of work in detecting DNS threats over the years, but very few
+involve machine learning, if any.
+The closest work in existence are non-learning oriented detection methods.
+
 \subsubsection{Cyber Squatting}
+
+Cyber squatting is a problem that is hard to combat.
+It is not illegal to register domain names that are similar to the names of trademarked names.
+It is also not easily detectable outside of using a black list.
+This is tedious and ineffective against unknown malicious names.
+In Chen \etal{}, the researchers were able to devise a browser extension that would warn users of
+possible typing mistakes.
+They named their system ATST, and found that it was able to detect up to $85\%$ of user errors.
+It was also fast, delivering responses in as little as $300$ milliseconds~\cite{squat}.
+Other systems for detection are built for website owners rather than end users.
+Microsoft's Strider~\cite{strider}, Veralab's tool~\cite{veralab}, and dnstwist~\cite{elceef} are
+all tools that a site owner can use to generate possible typo errors in their site names and check
+if domains are registered under those names.\
+dnstwist is the most recent and is quite effective.
+However, none of these serve a purpose for detection on the user end.
 
 \subsubsection{Generated Names}
 

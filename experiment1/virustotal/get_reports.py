@@ -59,6 +59,9 @@ def main():
         else:
             for sid in chunk:
                 failed.append(sid)
+            print(r.status_code)
+            print(r.text)
+            print('--------------------')
         time.sleep(16)
     print('---------')
     print('Complete!')

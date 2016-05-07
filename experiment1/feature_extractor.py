@@ -38,8 +38,6 @@ def main():
     reader = pd.read_csv(args.f, encoding = "ISO-8859-1", chunksize=100)
     headers_written = False
     for df in reader:
-        # drop the NaN rows. any NaN rows are missing a response
-        df.dropna(inplace=True)
         # add the entropy column
         df['ENTROPY'] = df['RRNAME'].map(shannon_entropy)
         # now map the urls based on the already created mapping
@@ -47,11 +45,11 @@ def main():
         # write it out
         if not headers_written:
             with open(args.o, 'w') as f:
-                df.to_csv(f)
+                df.to_csv(f, index=False)
                 headers_written = True
         else:
             with open(args.o, 'a') as f:
-                df.to_csv(f, header=False)
+                df.to_csv(f, header=False, index=False)
 
 
 if __name__ == '__main__':

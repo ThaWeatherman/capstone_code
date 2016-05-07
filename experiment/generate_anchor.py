@@ -23,4 +23,5 @@ anchor = dfs[0]
 for d in dfs[1:]:
     anchor = anchor.append(d, ignore_index=True)
 final_anchor = anchor.groupby('NAME').first().reset_index()
+final_anchor = final_anchor[df2.columns]
 final_anchor.to_csv('anchor.csv', index=False)

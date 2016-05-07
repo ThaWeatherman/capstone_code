@@ -1,0 +1,29 @@
+\section{Future Work}
+
+Unfortunately we were unable to use a large data set for this experiment.
+Our data set was only $30 MB$ in size, which is significant enough for a proof of concept experiment,
+but not large enough to simulate a real world use case.
+Companies using a system like this have terabytes worth of network traffic to parse through.
+We have been working with the Johns Hopkins University network administrator to gather a larger
+data set.
+She has collected $50 GB$ of purely DNS traffic and is in the process of running our extraction
+scripts on it to both anonymize the data and extract out the features we need for this system.
+Once this extraction process is completed, she will provide us with the data and we will run this
+same experimentation process on the data.
+We hope to reproduce similar results to our experiment, but on a larger scale.
+This will work as a feasibility test for implementing a live system for finding threats in DNS data.
+
+Upon completion of testing the large data set, we plan to build a live system using the process
+from our experiment.
+As we ran everything on an Apache Spark cluster, the system will be built using a Spark cluster.
+Spark provides a live streaming API that can be used to process data in real time.
+We would expand our experiment from working on batch jobs to working on streaming data.
+This would be a product that a company could use for threat detection with minimal setup.
+
+The advent of Big Data has opened new possibilities for threat detection.
+Machine learning allows us to adapt to rising threats while handling known threats, and data
+processing applications allow us to handle the large amounts of data flowing through company systems
+each day.
+The number of people connecting to the internet is increasing each day: it is critical that we create
+systems which can adapt to new threats while also handling large loads of data.
+This DNS threat model is but one example of a larger picture, but is a step towards better security for all.

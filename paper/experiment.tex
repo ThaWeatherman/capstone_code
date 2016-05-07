@@ -7,4 +7,72 @@ The data was properly anonymized prior to use so as to protect the privacy of in
 It was collected using the tool $tcpdump$ by the network administrator.
 The data consists only of DNS queries and responses.
 
+Our tool set was large and involved.
+All programming was done in Python as it is easy to use and provides many applications for data
+science applications.
+We used Amazon Web Services for hosting data as well as running our cluster.
+We used a three-node Apache Spark cluster, where each node has four virtual CPUs and $15$ gigabytes
+of memory~\cite{spark}.
+As we used Python for programming, we used the $pyspark$ interface to Spark for submitting batch jobs.
+We did initial cleaning and data exploration using the $pandas$ library~\cite{pandas}.
+We used the $scikit-learn$ library and the Spark $MLlib$ for performing machine learning tasks~\cite{scikit}.
+Finally, we used the VirusTotal API for determining malicious domains to use for seeding~\cite{vt}.
 
+We theorize that we will be able to detect algorithmically generated domain names in the data as
+well as possible DNS tunnels.
+Our initial data set consists of query-response pairs and their attributes.
+The data is contained in a CSV, and one pair is contained in each row.
+A row contains the following column entries: $OPCODE$, $QNAME$, $QTYPE$, $QCLS$, $RRNAME$, $RRTYPE$,
+$RCLS$, $TTL$, $RLEN$, $RDATA$, $AA$, $ID$, $QDCNT$, $ANCNT$, $NSCNT$, $ARCNT$.
+For an understanding of what each of these columns represents, please read RFCs $1034$ and $1035$~\cite{rfc1034}~\cite{rfc1035}.
+DNS tunnels will typically use what are called $TXT$ records --- a class of domain name record ---
+to send data.
+This data will also typically be contained in the $RDATA$ field of a DNS packet; however, some
+tunnels may also include this data in any field in the packet.
+Based on this, our data set should provide all of the necessary fields for detecting tunnel threats.
+Generated domain names are apparent in both the $QNAME$ and $RRNAME$ fields.
+Unfortunately, our initial data set does not include columns that would be helpful in detecting
+generated names.
+
+After data collection, we perform a feature extraction on our data set.
+We need to both clean our data and add fields for helping with detecting generated names.
+Using $pyspark$, we submit a batch job to our Spark cluster to do just that.
+Shannon Entropy is an algorithm for determining the entropy, or randomness, of a string.
+We add a column to the data representing the entropy score for the $RRNAME$.
+We then drop any rows that are missing data, remove the $QNAME$ column, and replace each domain name
+with a unique integer.
+Our machine learning libraries are designed to work off of integer data, so we must represent each
+domain name as such.
+Feature extraction produces a new CSV for us to use in our actual analysis.
+
+Next we need to determine our anchors.
+That is, we must determine a small number of rows to seed to the data set as representations of
+DNS threats.
+Because we are using unsupervised learning algorithms, these anchor rows are not labeled as malicious.
+Rather, we hope that their presence will help the learning algorithms cluster threats together properly.
+Since our data set is relatively small, we can extract all of the domain names in it and find
+a small number that are known as malicious.
+To do this, we submit each domain name to VirusTotal for scanning.
+VirusTotal returns a scan report with a score of how many of its scanning services detect a domain
+as malicious.
+We then select the ten highest rated domains and use them as our anchors.
+
+For our learning algorithms, we will use affinity propagation, mean shift, and hierarchical clustering.
+Each of these algorithms is an unsupervised clustering algorithm which chooses clusters on its own.
+Other clustering algorithms, such as k-means, require the user to specify a desired number of clusters.
+While it would be interesting to see how those standard clustering algorithms perform with this problem,
+our end goal is to design a system that can detect both existing and new threats.
+Thus, it is imperative that our algorithms do all the work on their own.
+Using our cluster, we run our learning algorithms on the data set iteratively.
+We begin using a window size of $50$ rows and include three of our anchor rows as well to provide
+a semi-supervised learning approach.
+We aggregate the results of each window for a final visualization and analysis to determine if
+the algorithm was able to detect any threats.
+We do this for each of the three algorithms.
+After performing this using the initial window size of $50$, we adjust the window size both up and
+down to determine an ideal window size for this analysis.
+Depending on the amount of good detections in the clusters, we can determine an optimal window size.
+This can be verified using our scan reports from VirusTotal to determine if a domain is already a
+known threat.
+This approach would not be used in a general use case on a large data set.
+It is only used in our experiment to verify our results.

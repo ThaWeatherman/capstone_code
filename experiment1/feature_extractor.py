@@ -9,7 +9,7 @@ import pandas as pd
 def shannon_entropy(s):
     prob = [float(s.count(c)/len(s)) for c in s]
     entropy = -1 * sum([p*math.log(p)/math.log(2) for p in prob])
-    return entropy
+    return round(entropy, 2)
 
 
 def ideal_shannon_entropy(length):
@@ -31,14 +31,11 @@ def main():
     add column for shannon entropy
     drop rows that dont have responses
     """
-    y = input('Have you already run get_mapping.py? [y/n]> ')
-    if y.lower() != 'y':
-        sys.exit(1)
     args = get_args()
     with open(args.m) as f:
         mapping = json.load(f)
 
-    reader = pd.read_csv(args.f, encoding = "ISO-8859-1", chunksize=100)
+    reader = pd.read_csv(args.f, encoding = "ISO-8859-1", chunksize=1000)
     headers_written = False
     for df in reader:
         # add the entropy column

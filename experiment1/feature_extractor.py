@@ -1,6 +1,7 @@
 import argparse
+import json
 import math
-import pickle
+import sys
 
 import pandas as pd
 
@@ -30,18 +31,22 @@ def main():
     add column for shannon entropy
     drop rows that dont have responses
     """
+    y = input('Have you already run get_mapping.py? [y/n]> ')
+    if y.lower() != 'y':
+        sys.exit(1)
     args = get_args()
-    with open(args.m, 'rb') as f:
-        mapping = pickle.load(f)
-    mapping = {'QNAME': mapping, 'RRNAME': mapping}
+    with open(args.m) as f:
+        mapping = json.load(f)
 
     reader = pd.read_csv(args.f, encoding = "ISO-8859-1", chunksize=100)
     headers_written = False
     for df in reader:
         # add the entropy column
-        df['ENTROPY'] = df['RRNAME'].map(shannon_entropy)
+        df['ENTROPY'] = df['NAME'].map(shannon_entropy)
         # now map the urls based on the already created mapping
-        df.replace(mapping, inplace=True)
+        # using df.replace() eats up gobs of memory for whatever reason
+        # df.replace(mapping, inplace=True)
+        df['NAME'] = df['NAME'].map(lambda x: mapping[x])
         # write it out
         if not headers_written:
             with open(args.o, 'w') as f:

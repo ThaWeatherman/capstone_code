@@ -1,5 +1,10 @@
+'''
+gets a mapping of unique domain names to integers
+run this after runnning clean.py
+'''
 import argparse
 import json
+import sys
 
 import pandas as pd
 
@@ -11,12 +16,14 @@ def get_args():
 
 
 def main():
+    y = input('Have you already run clean.py on the CSV? [y/n]> ')
+    if y.lower() != 'y':
+        print('Please first run clean.py on the data')
+        sys.exit(1)
     args = get_args()
     df = pd.read_csv(args.f, encoding = "ISO-8859-1")
-    qname_unique = df['QNAME'].dropna().unique()
-    rrname_unique = df['RRNAME'].dropna().unique()
-    all_names = set(qname_unique) | set(rrname_unique)
-    mapping = {name: i for name, i in zip(all_names, range(len(all_names)))}
+    name_unique = list(df['NAME'].unique())
+    mapping = {name: i for name, i in zip(name_unique, range(len(name_unique)))}
     with open('mapping.json', 'w') as f:
         json.dump(mapping, f)
 

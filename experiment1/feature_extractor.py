@@ -1,3 +1,9 @@
+'''
+calculates the shannon entropy for each of the domain names.
+maps domain names to integers.
+outputs everything to a new data frame.
+run with the -h flag for help.
+'''
 import argparse
 import json
 import math

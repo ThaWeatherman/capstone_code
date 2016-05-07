@@ -12,4 +12,6 @@ only 4 resources can be submitted at a time, and you can only make 4 calls per m
 # Anchor extraction
 
 once you have done all of that, run `python get_top_bad_domains.py` to generate an anchor CSV file.
-it will be placed one directory up, which is the main experiment directory
+it will be placed one directory up, which is the main experiment directory.
+*NOTE*, you will want to read the output CSV and kill any rows that you know arent malicious despite
+being marked as bad.

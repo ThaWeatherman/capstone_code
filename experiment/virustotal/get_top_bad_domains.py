@@ -12,6 +12,7 @@ print('Reading reports...')
 for report in tqdm(reports):
     with open(report) as f:
         r = json.loads(f.read())
-    all_reps.append({'positives': r['positives'], 'url': r['url']})
+    all_reps.append({'positives': r['positives'],
+                     'url': r['url'].replace('http://', '').replace('/', '')})
 df = pd.DataFrame(all_reps)
-df.sort_values('positives', ascending=False).head(n=20).to_csv('../anchor.csv', index=False)
+df.sort_values('positives', ascending=False).head(n=20).to_csv('../anchor_start.csv', index=False)

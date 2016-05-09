@@ -16,3 +16,4 @@ for report in tqdm(reports):
                      'url': r['url'].replace('http://', '').replace('/', '')})
 df = pd.DataFrame(all_reps)
 df.sort_values('positives', ascending=False).head(n=20).to_csv('../anchor_start.csv', index=False)
+print('{} total malicious domains'.format(len(df[df['positives'] > 0])))

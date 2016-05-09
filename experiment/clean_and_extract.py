@@ -14,6 +14,8 @@ from tqdm import tqdm
 
 
 def shannon_entropy(s):
+    if isinstance(s, float):
+        return 0.0
     """computes the shannon entropy of a given string `s`.returns a float"""
     prob = [float(s.count(c)/len(s)) for c in s]
     entropy = -1 * sum([p*math.log(p)/math.log(2) for p in prob])
@@ -32,30 +34,25 @@ if n:
     # if we know the number of rows, we can make a nice progress bar
     reader = tqdm(reader, total=math.ceil(n/chunksize))
 mapping = {}
-count = 0
+count = 1
 headers_written = False
 for df in reader:
-    # get rid of the NaN rows. we dont want to deal with them
-    df.dropna(inplace=True)
-    # get rid of these columns. killing NaN gets rid of all purely query rows, so no need for QR
-    # we only care about the RRNAMEs really, since most QNAMEs are exactly the same anyways.
-    # we also arent running analysis on the actual data in the rows. we really only care about the
-    # length of the data field.
-    del df['QNAME']
-    del df['RDATA']
-    del df['QR']
-    # rename the RRNAME column so we can just reference it by name
-    df.rename(columns={'RRNAME': 'NAME'}, inplace=True)
+    df.fillna(value=0.0, inplace=True)
+    del df['RRNAME']
     # add to the global mapping of domain names to integers
-    names = df['NAME'].unique()
+    # names = set(df['QNAME'].unique()) | set(df['RRNAME'].unique())
+    df['QNAME'] = df['QNAME'].map(lambda x: x.lower() if isinstance(x, str) else x)
+    names = df['QNAME'].unique()
     for name in names:
         if name not in mapping:
             mapping[name] = count
             count += 1
     # now make a shannon entropy column
-    df['ENTROPY'] = df['NAME'].map(shannon_entropy)
+    df['NAME_ENTROPY'] = df['QNAME'].map(shannon_entropy)
+    df['DATA_ENTROPY'] = df['RDATA'].map(shannon_entropy)
+    del df['RDATA']
     # now map names to ints
-    df['NAME'] = df['NAME'].map(lambda x: mapping[x])
+    df['QNAME'] = df['QNAME'].map(lambda x: mapping[x])
     # write out the chunk
     if not headers_written:
         with open(sys.argv[2], 'w') as f:

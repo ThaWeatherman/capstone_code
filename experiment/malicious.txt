@@ -141,8 +141,8 @@ c-73-213-92-247.hsd1.md.comcast.net
 mapps57a.blogspot.ca
 my.telegraph.co.uk
 patft.uspto.gov
-revcontentimgacher.integraclick.netdna-cdn.com
 cdn.revcontent.com
+revcontentimgacher.integraclick.netdna-cdn.com
 ar.voicefive.com
 allianz-assistance_gateway.aga.nsatc.net
 067.cz
@@ -205,10 +205,10 @@ p4-fkixnq552mg7q-fikzrgdqkfwnsw5u-831591-i1-v6exp3-v4.metric.gstatic.com
 p4-fkixnq552mg7q-fikzrgdqkfwnsw5u-831591-s1-v6exp3-v4.metric.gstatic.com
 p4-gf7y32uup25vu-t7dwhckvdmskocas-if-v6exp3-v4.metric.gstatic.com
 p4-akavg23hcirck-uj5hfrndalcpq4ku-if-v6exp3-v4.metric.gstatic.com
+p4-akavg23hcirck-uj5hfrndalcpq4ku-773369-i2-v6exp3-ds.metric.gstatic.com
+p4-akavg23hcirck-uj5hfrndalcpq4ku-773369-i1-v6exp3-v4.metric.gstatic.com
 p4-gf7y32uup25vu-t7dwhckvdmskocas-618723-i2-v6exp3-ds.metric.gstatic.com
 p4-gf7y32uup25vu-t7dwhckvdmskocas-618723-i1-v6exp3-v4.metric.gstatic.com
-p4-akavg23hcirck-uj5hfrndalcpq4ku-773369-i1-v6exp3-v4.metric.gstatic.com
-p4-akavg23hcirck-uj5hfrndalcpq4ku-773369-i2-v6exp3-ds.metric.gstatic.com
 stats.kaltura.com
 17.71.17c6.ip4.static.sl-reverse.com
 js.cycleuniverseupdate.com
@@ -217,8 +217,8 @@ ncjnqwcks.eclampsialemontree.net
 usweb.dotomi.com
 d2hlpp31teaww3.cloudfront.net
 wex.theoklahomapubli.netdna-cdn.com
-a.uzibukibbib.com
 a.uzibukibbwf.com
+a.uzibukibbib.com
 player-h-cdn-com.holanetworksltd.netdna-cdn.com
 adserve-nj.1rx.io
 bidder-us-east-rhy-1.ffbtas.com
@@ -259,5 +259,5 @@ p2-cqxlta7ubelkw-l3cxc4m37rnhwksb-120548-i1-v6exp3-ds.metric.gstatic.com
 p2-cqxlta7ubelkw-l3cxc4m37rnhwksb-120548-s1-v6exp3-v4.metric.gstatic.com
 ibeat.indiatimes.com
 1qdzy.voluumtrk2.com
-io8rn.trackvoluum.com
 tracking.instantcheckmate.com
+io8rn.trackvoluum.com

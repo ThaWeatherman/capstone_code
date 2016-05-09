@@ -3,7 +3,7 @@
 \usepackage[letterpaper,margin=1in,headheight=110pt]{geometry}
 \usepackage{booktabs}
 % \usepackage{graphicx}
-% \usepackage{listings}
+\usepackage{listings}
 \usepackage{fancyhdr}
 \usepackage{hyperref}
 
@@ -17,6 +17,19 @@
 
 \begin{document}
 
+\lstset{
+  language=Python,
+  basicstyle=\small,          % print whole listing small
+  keywordstyle=\bfseries,
+  identifierstyle=,           % nothing happens
+  commentstyle=,              % white comments
+  stringstyle=\ttfamily,      % typewriter type for strings
+  showstringspaces=false,     % no special string spaces
+  numbers=left,
+  numberstyle=\tiny,
+  numbersep=5pt,
+  frame=tb,
+}
 
 \title{Detecting Malicious Activities using Passive DNS Data}
 
@@ -39,5 +52,7 @@
 
 \bibliographystyle{plain}
 \bibliography{bib}
+
+\input{appendix}
 
 \end{document}

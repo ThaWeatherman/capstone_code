@@ -1,0 +1,63 @@
+\section{Appendix: Code}
+
+\lstinputlisting[language=Python, caption=Data cleaning and feature extraction]{../experiment/clean_and_extract.py}
+
+\lstinputlisting[language=Python, caption=Anchor file creation]{../experiment/generate_anchor.py}
+
+\lstinputlisting[language=Python, caption=Machine Learning code]{../experiment/learn.py}
+
+\lstinputlisting[language=Python, caption=Check anomalous domains for malicious domains]{../experiment/check_anomalies.py}
+
+\lstinputlisting[language=Python, caption=Grab the highest scoring malicious domains]{../experiment/virustotal/get_top_bad_domains.py}
+
+\lstinputlisting[language=Python, caption=Start VirusTotal scanning of URLs in data set]{../experiment/virustotal/start_scans.py}
+
+\lstinputlisting[language=Python, caption=Get reports back from VirusTotal]{../experiment/virustotal/get_reports.py}
+
+\begin{lstlisting}[caption=Required Python libraries and versions]
+backports.shutil-get-terminal-size==1.0.0
+cycler==0.10.0
+decorator==4.0.9
+entrypoints==0.2.1
+ipykernel==4.3.1
+ipython==4.2.0
+ipython-genutils==0.1.0
+ipywidgets==5.1.3
+Jinja2==2.8
+jsonschema==2.5.1
+jupyter==1.0.0
+jupyter-client==4.2.2
+jupyter-console==4.1.1
+jupyter-core==4.1.0
+MarkupSafe==0.23
+matplotlib==1.5.1
+mistune==0.7.2
+nbconvert==4.2.0
+nbformat==4.0.1
+notebook==4.2.0
+numpy==1.11.0
+pandas==0.18.1
+pexpect==4.0.1
+pickleshare==0.7.2
+ptyprocess==0.5.1
+Pygments==2.1.3
+pyparsing==2.1.1
+python-dateutil==2.5.3
+pytz==2016.4
+pyzmq==15.2.0
+qtconsole==4.2.1
+requests==2.10.0
+scikit-learn==0.17.1
+scipy==0.17.0
+simplegeneric==0.8.1
+six==1.10.0
+terminado==0.6
+tornado==4.3
+tqdm==4.5.0
+traitlets==4.2.1
+widgetsnbextension==1.2.2
+\end{lstlisting}
+
+\lstinputlisting[language=bash, caption=Run data cleaning and feature extraction scripts]{../experiment/run.sh}
+
+\lstinputlisting[language=bash, caption=Run the learning process scripts on the data]{../experiment/learn.sh}

@@ -1,3 +1,88 @@
 \section{Results}
 
-lol
+The results of the experiment were quite promising.
+We discovered an optimal algorithm and window size to use on later data sets for further experimentation.
+We ran the data set through each of the clustering algorithms multiple times with varying window sizes.
+The process is more effective than prior similar experiments.
+
+There were $404199$ total rows in the data set, each representing a DNS query or response.
+Based on scan reports from Virus Total, there were $266$ total known bad domain names contained
+within the data set.
+This number is based on the scan reports obtained from Virus Total.
+Any domains with a positive score higher than $0$ are considered malicious.
+
+\begin{table}[]
+\centering
+\caption{Mean Shift results}
+\label{my-label}
+\begin{tabular}{@{}|l|l|l|l|l|l|@{}}
+\toprule
+Window Size & Rows & Seeds & Run Time & Total Anomalous & Total Malicious \\ \midrule
+50          & 48   & 2     & 1m 52s   & 16226           & 252             \\ \midrule
+100         & 96   & 4     & 1m 33s   & 13994           & 260             \\ \midrule
+150         & 144  & 6     & 1m 11s   & 12985           & 260             \\ \midrule
+200         & 192  & 8     & 1m 8s    & 12470           & 262             \\ \midrule
+250         & 240  & 10    & 0m 53s   & 12138           & 262             \\ \midrule
+300         & 288  & 12    & 1m 18s   & 11934           & 263             \\ \bottomrule
+\end{tabular}
+\end{table}
+
+The details for Mean Shift can be seen in table $1$.
+The fastest run of the algorithm came from a window size of $250$.
+The most accurate run had a window size of $300$.
+However, that run took an additional $25$ seconds and only increased the total malicious domains by one.
+It would be safe to choose either $250$ or $300$ as the window size, but speed is ideal in any
+real-time system, so $250$ would be the better choice.
+
+\begin{table}[]
+\centering
+\caption{Affinity Propagation results}
+\label{my-label}
+\begin{tabular}{@{}|l|l|l|l|l|l|@{}}
+\toprule
+Window Size & Rows & Seeds & Run Time & Total Anomalous & Total Malicious \\ \midrule
+50          & 48   & 2     & 2m 8s    & 17283           & 173             \\ \midrule
+100         & 96   & 4     & 2m 23s   & 17279           & 204             \\ \midrule
+150         & 144  & 6     & 3m 18s   & 16989           & 224             \\ \midrule
+200         & 192  & 8     & 4m 38s   & 16722           & 237             \\ \bottomrule
+\end{tabular}
+\end{table}
+
+The results for Affinity Propagation can be seen in table $2$.
+This algorithm clearly did not perform as well as Mean Shift:
+it was slower, and actually got slower with increased window sizes; it detected fewer total malicious
+domains; and the total number of anomalous domains was higher.
+Because the algorithm got progressively slower, we did not run the experiment on window sizes of
+$250$ or $300$ as it did not seem worthwhile.
+This algorithm is clearly the worse decision thus far.
+
+\begin{table}[]
+\centering
+\caption{K-means results}
+\label{my-label}
+\begin{tabular}{@{}|l|l|l|l|l|l|@{}}
+\toprule
+Window Size & Rows & Seeds & Run Time & Total Anomalous & Total Malicious \\ \midrule
+50          & 48   & 2     & 2m 39s   & 16624           & 246             \\ \midrule
+100         & 96   & 4     & 1m 47s   & 14435           & 259             \\ \midrule
+150         & 144  & 6     & 1m 15s   & 13349           & 260             \\ \midrule
+200         & 192  & 8     & 1m 3s    & 12684           & 262             \\ \midrule
+250         & 240  & 10    & 0m 53s   & 12310           & 262             \\ \midrule
+300         & 288  & 12    & 0m 58s   & 12069           & 263             \\ \bottomrule
+\end{tabular}
+\end{table}
+
+Finally, the results from the K-means algorithm can be seen in table $3$.
+We used two clusters for this algorithm based on the results from the Mean Shift experiments.
+Upon viewing how many clusters were used most often across all the windows of Mean Shift, it was
+apparent that two clusters were most often used.
+As can be seen in the results, K-means performed almost identically to Mean Shift.
+It's speed is roughly the same and it detects roughly the same number of malicious domains as Mean
+Shift does for each window.
+The only real difference is the total number of anomalous domains selected as well.
+Based on these findings, we could use the K-means algorithm with two clusters in place of Mean Shift.
+However, it is more ideal to use an algorithm that decides on cluster numbers on its own.
+
+Using our best results from the Mean Shift algorithm, our approach was able to detect $263$ out of
+the $266$ total malicious domain names.
+This proves our hypothesis that machine learning can be used to detect threats in DNS data.

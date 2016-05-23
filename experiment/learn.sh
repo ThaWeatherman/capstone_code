@@ -1,7 +1,8 @@
 #!/bin/bash
 
 echo Running learning algorithm
-python learn.py $1
+python learn.py $1 $2
+# remove duplicates
 awk '!x[$0]++' anomalies.txt > anom.txt
 echo Checking anomalies for malicious domains
 python check_anomalies.py

@@ -10,12 +10,12 @@ import pandas as pd
 from sklearn.cluster import MeanShift, estimate_bandwidth, AffinityPropagation, KMeans
 
 
-if len(sys.argv) != 2:
-    print('usage: learn.py <control>')
+if len(sys.argv) != 3:
+    print('usage: learn.py <control> <input.csv>')
     sys.exit(1)
 
 
-dataset = 'dns_final.csv'
+dataset = sys.argv[2]  # dns_final.csv
 anchor_file = 'anchor.csv'
 map_file = 'mapping.json'
 reports = 'virustotal/data/reports/'
@@ -66,9 +66,9 @@ for df in reader:
     ar = np.concatenate((ar, np.array(anch)), axis=0)
 
     bandwidth = estimate_bandwidth(ar, quantile=0.5)
-    # alg = MeanShift(bandwidth=bandwidth, bin_seeding=True)
+    alg = MeanShift(bandwidth=bandwidth, bin_seeding=True)
     # alg = AffinityPropagation()
-    alg = KMeans(n_clusters=2)
+    # alg = KMeans(n_clusters=2)
     alg.fit(ar)
     # matches with row numbers in the nparray
     labels = alg.labels_

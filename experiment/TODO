@@ -1,0 +1,6 @@
+shell script for iterations
+    take urls from anomalies.txt
+    create mini data set from original with these
+    supply that to next round of iterations
+    final result will be after N iterations
+
